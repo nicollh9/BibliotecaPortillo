@@ -8,15 +8,15 @@ const clientesRoutes = require('./clientes/clientes');
 router.use(passport.initialize());
 
 //public
-/*router.use('/seguridad',
+router.use('/seguridad',
     verifyApiHeaderToken,
     seguridadRoutes);
-*/
 
+//middlewares
 router.use(
     '/clientes',
     verifyApiHeaderToken,
-    //jwtMiddleware,
+    jwtMiddleware,
     clientesRoutes
 );
 

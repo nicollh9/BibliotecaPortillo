@@ -25,7 +25,7 @@ class Usuarios {
       .catch((err) => { console.error(err) });
   }
   
-  //
+  //New user
   async new(email, password, roles = []) {
     const newUsuario = {
       email,
@@ -36,14 +36,14 @@ class Usuarios {
     return rslt;
   }
 
-  //
+  //GETALL
   async getAll() {
     const cursor = this.collection.find({});
     const documents = await cursor.toArray();
     return documents;
   }
 
-  //
+  //GET FACETED
   async getFaceted(page, items, filter = {}) {
     const cursor = this.collection.find(filter);
     const totalItems = await cursor.count();
@@ -59,7 +59,7 @@ class Usuarios {
     };
   }
 
-  //
+  //GET BY ID 
   async getById(id) {
     const _id = new ObjectId(id);
     const filter = { _id };
@@ -67,7 +67,7 @@ class Usuarios {
     return myDocument;
   }
 
-  //
+  //GET BY EMAIL
   async getByEmail(email) {
     const filter = {email};
     return await this.collection.findOne(filter);
@@ -95,6 +95,13 @@ class Usuarios {
     const result = await this.collection.updateOne(filter, updateCmd);
     return result;
   }
+
+  //ELIMINACION DE USUARIO
+  async deleteOne(id) {
+  const filter = {_id: new ObjectId(id)};
+  return await this.collection.deleteOne(filter);
+  }
+
 }
 
 

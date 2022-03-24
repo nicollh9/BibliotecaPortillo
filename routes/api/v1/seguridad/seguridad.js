@@ -7,9 +7,7 @@ const usuariosModel = new Usuarios();
 router.post('/signin', async(req, res) => {
     try {
         const { email, password } = req.body;
-        // TODO: realizar validaciones de entrada de datos
         let rslt = await usuariosModel.new(email, password);
-        // joi ()
         res.status(200).json({ status: 'success', result: rslt });
     } catch (ex) {
         console.log(ex);
@@ -17,6 +15,7 @@ router.post('/signin', async(req, res) => {
     }
 });
 
+//LOGIN
 router.post('/login', async(req, res) => {
     try {
         const { email, password } = req.body;
@@ -42,9 +41,8 @@ router.post('/login', async(req, res) => {
     }
 });
 
-    //RECUPERACION DE CONTRASEÑA
-
-    //OLVIDAR CONTRASEÑA
+//RECUPERACION DE CONTRASEÑA
+//OLVIDAR CONTRASEÑA
 router.post('/forget-password', async (req, res) => {
     try {
         const email = req.body.email;
@@ -167,5 +165,20 @@ router.post('/forget-password', async (req, res) => {
         res.status(500).json({status: 'failed', msg: 'Internal Server error'});
     }
   });
+
+//DELETE USER
+    router.delete('/delete/:id', async (req, res) =>{
+        try {
+            const {id} = req.params;
+            const result = await usuariosModel.deleteOne(id);
+            res.status(200).json({
+                status:'ok',
+                result
+            });
+        } catch (ex) {
+            console.log(ex);
+            res.status(500).json({status:'failed'});
+        }
+    });      
 
 module.exports = router;
