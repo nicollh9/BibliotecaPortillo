@@ -5,6 +5,7 @@ const { passport, jwtMiddleware } = require('./seguridad/jwtHelper');
 
 const seguridadRoutes = require('./seguridad/seguridad');
 const clientesRoutes = require('./clientes/clientes');
+const empleadosRoutes = require('./empleados/empleados');
 router.use(passport.initialize());
 
 //public
@@ -18,6 +19,12 @@ router.use(
     verifyApiHeaderToken,
     jwtMiddleware,
     clientesRoutes
+);
+
+router.use(
+    '/empleados',
+    verifyApiHeaderToken,
+    empleadosRoutes
 );
 
 module.exports = router;
