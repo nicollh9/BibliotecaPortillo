@@ -1,23 +1,11 @@
 const ObjectId = require('mongodb').ObjectId;
 const getDb = require('../mongodb');
-//const getDb = require('../db')
 let db = null;
 
 class Clientes {
     collection = null;
     constructor() {
-
-        /*getDb()
-            .then((database) => {
-                db = database;
-                if (process.env.MIGRATE === 'true') {
-                    const createStatement = 'CREATE TABLE IF NOT EXISTS clientes (id INTEGER PRIMARY KEY AUTOINCREMENT, idCliente TEXT, nombreCliente TEXT, apellidoCliente TEXT, direccionCliente TEXT, edadCliente TEXT, sexoCliente TEXT);';
-                    db.run(createStatement);
-                }
-            })
-            .catch((err) => { console.error(err) });
-    }*/
-
+      
     getDb()
       .then((database) => {
         db = database;
